@@ -1,60 +1,98 @@
-# DSA210 Project-Correlation Analysis of Rising Street Culture and Youth Social Metrics
+# DSA210 Project-Correlation Analysis: Rising Street Culture Trends vs. Youth Risk Indices in Europe (2004-2024)
 
 ## Overview
-This project aims to analyze the correlation between the rising popularity of the Street Culture and changes in the Youth Social Metrics by focusing on the United Kingdom over the period 2015-2024. Taking this place and the timeline as a sample it is aimed to make global analysis. First the Street Culture and the Youth Social Metrics will be defined. Street Culture in this context contains elements from several areas such as fashion,music and sports. These independent variables will be assessed as the cultural proxies that define the popularity of the Street Culture. On the other hand substance use and anti-social behaviour will be the dependent variables that will be assessed as the social deterioration proxies. The analysis will be conducted between these two proxies to show if there is a correlation. This project aims to show an important rising social phenomenon which is affecting all individuals through social media, and make individuals gain insight about this phenomenon.
+This project aims to analyze the correlation between the rising popularity of the street culture (proxied by Hip-Hop/Drill music interests, urban fashion interests, TV shows or movies depicting this lifestyle, linguistic habits such as slang adoption, and urban festivals) and changes in the youth risk indices (proxied by youth crime rates, NEET rates, substance abuse, and school exclusions) by focusing on major European economies (UK, France, Germany) by conducting a comparative panel analysis.
 
-## Plan of the Proejct
+First, the street culture trends and youth risk indices will be defined. Street culture in this context contains elements from fashion, music, media, language, and live events. These variables will be assessed as the proxies that show the popularity of the street culture. On the other hand, youth crime rates, NEET (not in education, employment, or training) rates, substance abuse admissions, and school exclusion rates will be the variables that will be assessed as the youth risk indices that are hypothesized to correlate with street culture trends.
 
-After the aim of the project is determined, the data that will be used will be determined and classified with repect to a hypothesis which is prepared in accordance to the goal of the project. The hypothesis must evaluate the possible correlation between the metrics. Then data collection steps will be determined and applied which is followed by data cleaning and exploratory data analysis. After that hypothesis testing steps will be conducted which precedes the final step, applying machine learning methods and presenting the project.
+The analysis will be conducted to show if there is a significant statistical correlation by data collection of each proxy with an enriched resource basis, EDA to further understand and evaluate the collected data, visualization to depict the data and possible correlation in accordance with the hypothesis, and finally ML model applications for further analysis including socioeconomic controls. This project aims to show an important rising social phenomenon which is affecting all individuals through social media, and make individuals gain insight about this social impact while suggesting further work.
+
+## Motivation
+In the world we live now, trends diffuse through different generations and regions at a rapid pace, so these diffusing trends are important factors for both the development of individuals and societies. One of the rising trends nowadays is the rising street culture trend as can be seen by the popular culture of newer generations. Therefore, I wanted to work on this critical topic of our generation that affects each individual directly or indirectly, and wanted to analyze if this rising trend correlates with any youth risk indices such as youth crime rates and NEET rates. Since this project outlines a social phenomenon affecting our generation, I defined proxies carefully that possibly alter the correlation the most. By offering predictive insights, this project will be useful for social analysis.
+
+## Plan of the Project
+
+The project will follow a structured Data Science pipeline divided into five key phases:
+
+1.  **Metric Definition & Hypothesis Formulation**
+    * **Operationalization:** Define "Street Culture" using five measurable proxies: Music (Drill/Hip-Hop), Fashion (Streetwear), Media (TV/Cinema), Language (Slang), and Events (Festivals).
+    * **Risk Metrics:** Define "Youth Risk" using statutory Eurostat metrics: Youth Violent Crime Rates, NEET Rates, Substance Abuse, and School Exclusions.
+    * **Hypothesis:** Formulate null and alternative hypotheses focusing on the temporal correlation and potential lag effects between cultural spikes and social risk indicators across the UK, France, and Germany.
+
+2.  **Data Collection**
+    * **Culture Data:** Develop Python scripts using `pytrends` to extract monthly Search Volume Indices (SVI) for defined keywords (2004–2024), handling language localization for each country.
+    * **Risk Data:** Extract annual socioeconomic and crime datasets from the Eurostat public database, ONS (UK), and National Health services.
+    * **Harmonization:** Merge these disparate sources into a single Panel Dataset (Country × Year), resampling monthly culture data to annual means to align with statutory records.
+
+3.  **Data Cleaning & Exploratory Data Analysis (EDA)**
+    * **Preprocessing:** Handle missing values (e.g., historical crime data gaps) using linear interpolation and normalize all metrics to a [0,1] scale for direct visual comparison.
+    * **Visual Analysis:** Generate Time-Series plots to observe long-term trends and Heatmaps to visualize the intensity of cultural adoption versus risk levels across different regions.
+
+4.  **Hypothesis Testing**
+    * **Correlation Analysis:** Conduct Pearson and Spearman correlation tests to evaluate the strength and direction of the relationship between Street Culture and Youth Risk indices.
+
+5.  **Machine Learning & Presentation**
+    * **Modeling:** Apply Panel Regression Models to analyze the impact of culture on risk variables while controlling for country-specific heterogeneity (GDP, Inequality, Demographics).
+    * **Clustering:** Use K-Means clustering to group years or regions based on "High Risk/High Culture" intensity.
+    * **Reporting:** Present findings through a comprehensive report.
 
 ## Explanation of the Data
 
-Focusing on the sample which is trends in United Kingdom between 2015-2024, corresponding proxies can be classified as:
-### Independent Variables
-1)Penetration of Rap and Hip-Hop music into mainstream British culture.
+To ensure statistical rigor, this project employs a **Multi-Source Enrichment Strategy**. We combine **Digital Sentiment Data** (Google Trends) with **Hard Economic & Administrative Data** (Industry Reports, Eurostat, NHS/EUDA) to create a verified Panel Dataset for the UK, France, and Germany (2004–2024).
 
-2)Popularity of urban streetwear in fashion trends.
+### 1. Independent Variables: Street Culture Intensity
+We quantify "Street Culture" by layering **Digital Curiosity** (what people search) with **Economic Consumption** (what people buy).
 
-3)Adoption of sports rooted in street culture such as basketball.
+* **Layer A: Digital Interest (The "5-Pillar" Google Trends Index)**
+    * **Source:** Google Trends API (`pytrends`).
+    * **Metric:** Normalized Search Volume Index (0-100).
+    * **Pillar 1 (Audio):** Interest in "Drill", "Grime", "Deutschrap", "Rap Français".
+    * **Pillar 2 (Visual):** Interest in "Streetwear", "Tech Fleece", "Trapstar", "Corteiz".
+    * **Pillar 3 (Narrative):** Interest in culture-defining media (e.g., "Top Boy", "Validé").
+    * **Pillar 4 (Language):** Interest in slang definitions (e.g., "Roadman meaning", "Talahon").
+    * **Pillar 5 (Events):** Interest in urban festivals (e.g., "Wireless Festival").
 
-### Dependent Variables
-1)Prevalence of addictive usage among teenagers. 
+* **Layer B: Economic Validation (Hard Data Enrichment)**
+    * **Source:** Annual Music Industry Reports from **BPI** (UK), **SNEP** (France), and **BVMI** (Germany).
+    * **Metric:** Annual Market Share (%) of Hip-Hop/Rap.
+    * **Role:** This serves as a "ground truth" variable to verify that rising search volumes correlate with actual market dominance and financial consumption.
 
-2)Incidents of crimes that are associated with street culture.
+### 2. Dependent Variables: Youth Risk Indices
+We measure "Social Deterioration" using statutory data on Crime, Economic Activity, and Public Health.
 
+* **Metric A: Youth Violent Crime Rate (Legal Risk)**
+    * **Source:** **Eurostat** (Table `crim_off_cat`) and **ONS** (UK Crime Survey).
+    * **Metric:** Recorded offences for "Robbery" and "Serious Assault" per 100,000 inhabitants.
+    * **Role:** Proxies the prevalence of gang-related physical violence.
 
+* **Metric B: NEET Rate (Socioeconomic Risk)**
+    * **Source:** **Eurostat** (Table `edat_lfse_20`).
+    * **Metric:** Percentage of population aged 15-29 **N**ot in **E**mployment, **E**ducation, or **T**raining.
+    * **Role:** Proxies social disengagement and the rejection of traditional economic pathways.
 
-The corresponding data for each metric will be:
+* **Metric C: Substance Abuse Admissions (Health Risk - Enrichment)**
+    * **Source:** **EUDA** (European Union Drugs Agency) & National Health Services.
+    * **Metric:** Drug-induced death rates or hospital admissions for age groups 15-24.
+    * **Role:** Adds a biological/health dimension to the "Risk" definition, moving beyond just legal statistics.
 
-1)Percentage of Rap/Hip-Hop market share of total UK music market
+* **Metric D: School Exclusion & Suspension Rates (Educational Risk)**
+    * **Source:** National Ministry of Education Reports (Department for Education (UK), DEPP (France)).
+    * **Metric:** Permanent exclusions and fixed-period suspensions per 1,000 pupils.
+    * **Role:** Serves as a "Early Warning" indicator of behavioral deterioration.
 
-2)Google searching trends for online shopping
+### 3. Control Variables (Socioeconomic Context)
+To isolate the specific impact of "Street Culture" on youth risk, we must control for macro-economic factors.
 
-3)Number of streetball events in the UK
+* **Control A: Real GDP per Capita** (Source: Eurostat `sdg_08_10`) - Controls for economic recessions.
+* **Control B: Income Inequality (Gini Coefficient)** (Source: Eurostat `tessi190`) - Controls for social stratification.
+* **Control C: Youth Population Density** (Source: Eurostat `demo_pjangroup`) - Controls for demographic shifts.
 
-4)Percentage of teenagers reporting drug use
-
-5)Police-recorded rate of crimes among teenagers
-
-All of this data will be collected from databases of the UK and evaluated in terms of reliability.
-
-1)Data tables containing the annual market share percentages will be extracted from the BPI (British Phonographic Industry) Annual Reports and press releases, often in collaboration with the Official Charts Company.
-
-2)Fashion trends data will be colelcted from the Google Trends Tool. Search interests for relevant keywords will be collected.
-
-3)Reports from FIBA 3X3 or equivalent street sports will be evaluated
-
-4)Time series data of addivtive usage will be extracted from the UK databases
-
-5)Crime reports of teenagers in the UK will be evaluated
+### Data Harmonization Strategy
+* **Frequency Alignment:** Digital data (Monthly) will be resampled to **Annual Means** to match the granularity of the "Hard Data" (Industry Reports and Eurostat).
+* **Geographic Alignment:** Post-Brexit UK data will be stitched from national sources (ONS/BPI) to maintain continuity with EU datasets.
 
 ## Hypothesis
-The hypothesis of this project will focus on the correlation of the observed data rather than direct causation, so the Null Hypothesis will be:
+The study focuses on the correlation between observed data rather than implying direct causation.
 
-There is no statistically significant correlation between the rising popularity of street culture metrics and the prevalence of social deterioration among teenagers in the UK over the analysis period.
-
-On the other hand the Alternative Hypothesis will be:
-
-There is a statistically significant positive linear correlation between the rising popularity of street culture metrics and the prevalence of social deterioration among teenagers in the UK over the analysis period.
-
-
+* **Null Hypothesis ($H_0$):** There is no statistically significant correlation between the rising popularity of Street Culture metrics and the prevalence of Youth Risk Indices (Crime/NEET/Health) in the UK, France, and Germany over the analysis period.
+* **Alternative Hypothesis ($H_1$):** There is a statistically significant positive linear correlation (with potential lag effects) between the rising popularity of Street Culture metrics and the prevalence of Youth Risk Indices, even when controlling for socioeconomic factors.
