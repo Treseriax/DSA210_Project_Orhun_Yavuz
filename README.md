@@ -96,3 +96,16 @@ The study focuses on the correlation between observed data rather than implying 
 
 * **Null Hypothesis ($H_0$):** There is no statistically significant correlation between the rising popularity of Street Culture metrics and the prevalence of Youth Risk Indices (Crime/NEET/Health) in the UK, France, and Germany over the analysis period.
 * **Alternative Hypothesis ($H_1$):** There is a statistically significant positive linear correlation (with potential lag effects) between the rising popularity of Street Culture metrics and the prevalence of Youth Risk Indices, even when controlling for socioeconomic factors.
+
+## Steps of The Analysis
+To reproduce the data, data_collection.ipynb must be seen. Explanations and comments explain the structure of the data.
+
+To gain more insight about the data and understand the descriptive statistics, eda_visualisation.ipynb must be seen. Visualisation of data and the depiction of the descriptive statistics further explain the data before hypothesis testing. All of the metrics are included and depicted.
+
+To reproduce the hypothesis testing, hypothesis_test.ipynb must be seen. Correlation coefficients and p-values are taken into consideration as H0 is rejected.
+
+## Findings
+As can be seen from hypothesis_test.ipynb, all three major economies of Europe UK, Germany and France show a significant correlation between street culture metrics and the youth risk indices which is further proven by the p-values. So as a result of the work that has been done until now, a significant correlation is detected.
+
+## Limitations and Future Work
+
