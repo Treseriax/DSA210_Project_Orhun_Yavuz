@@ -108,4 +108,8 @@ To reproduce the hypothesis testing, hypothesis_test.ipynb must be seen. Correla
 As can be seen from hypothesis_test.ipynb, all three major economies of Europe UK, Germany and France show a significant correlation between street culture metrics and the youth risk indices which is further proven by the p-values. So as a result of the work that has been done until now, a significant correlation is detected.
 
 ## Limitations and Future Work
+While the analysis establishes a strong correlation, several limitations must be acknowledged:
+1.  **Proxy Limitations:** "Violence with Injury" is a broad category. A more granular dataset specifically for "Knife Crime" across all EU nations would improve precision.
+2.  **Imputation:** Due to gaps in European school exclusion data, some years rely on interpolation or cross-country averages, which may smooth out local anomalies.
+3.  **Causality vs. Correlation:** While Lag Analysis suggests a "leading indicator" effect, we cannot strictly prove causality without controlling for unobserved variables (e.g., changes in police funding or social media algorithms).
 
