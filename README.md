@@ -97,19 +97,33 @@ The study focuses on the correlation between observed data rather than implying 
 * **Null Hypothesis ($H_0$):** There is no statistically significant correlation between the rising popularity of Street Culture metrics and the prevalence of Youth Risk Indices (Crime/NEET/Health) in the UK, France, and Germany over the analysis period.
 * **Alternative Hypothesis ($H_1$):** There is a statistically significant positive linear correlation (with potential lag effects) between the rising popularity of Street Culture metrics and the prevalence of Youth Risk Indices, even when controlling for socioeconomic factors.
 
-## Steps of The Analysis
+## Findings
+As demonstrated in `hypothesis_test.ipynb`, all three major economies (UK, Germany, France) show a significant statistical correlation between street culture metrics and youth risk indices ($p < 0.05$).
+
+This relationship is further validated in `ml_analysis.ipynb`, where:
+1.  **First-Difference Regression** suggests a causal link between cultural spikes and crime spikes (controlling for economy).
+2.  **Clustering** confirms the existence of a pan-European "High Intensity Era" (2018-2024).
+
+Detailed interpretation of these results is presented in the `final_report.pdf`.
+
+## Reproduction of the Project
+To understand the project README.md must be read before moving on with the data collection.
+
 To reproduce the data, data_collection.ipynb must be seen. Explanations and comments explain the structure of the data.
 
 To gain more insight about the data and understand the descriptive statistics, eda_visualisation.ipynb must be seen. Visualisation of data and the depiction of the descriptive statistics further explain the data before hypothesis testing. All of the metrics are included and depicted.
 
 To reproduce the hypothesis testing, hypothesis_test.ipynb must be seen. Correlation coefficients and p-values are taken into consideration as H0 is rejected.
 
-## Findings
-As can be seen from hypothesis_test.ipynb, all three major economies of Europe UK, Germany and France show a significant correlation between street culture metrics and the youth risk indices which is further proven by the p-values. So as a result of the work that has been done until now, a significant correlation is detected.
+To apply machine learning methods on the data to further assess the data and the findings, ml_analysis.ipynb must be seen.
+
+To detailly evaluate the findings final_report.pdf must be seen.
 
 ## Limitations and Future Work
 While the analysis establishes a strong correlation, several limitations must be acknowledged:
 1.  **Proxy Limitations:** "Violence with Injury" is a broad category. A more granular dataset specifically for "Knife Crime" across all EU nations would improve precision.
 2.  **Imputation:** Due to gaps in European school exclusion data, some years rely on interpolation or cross-country averages, which may smooth out local anomalies.
 3.  **Causality vs. Correlation:** While Lag Analysis suggests a "leading indicator" effect, we cannot strictly prove causality without controlling for unobserved variables (e.g., changes in police funding or social media algorithms).
+
+NLP methods can be applied on the rap music samples to further extract metrics and data for these metrics as a future work.
 
